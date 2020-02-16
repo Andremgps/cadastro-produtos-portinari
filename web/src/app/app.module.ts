@@ -6,13 +6,11 @@ import { AppComponent } from './app.component';
 import { PoModule } from '@portinari/portinari-ui';
 import { RouterModule } from '@angular/router';
 import { HomeComponent } from './pages/home/home.component';
-import { CategoriaComponent } from './pages/categorias/categoria/categoria.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent,
-    CategoriaComponent,    
+    HomeComponent
   ],
   imports: [
     BrowserModule,

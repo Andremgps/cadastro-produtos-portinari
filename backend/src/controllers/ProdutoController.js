@@ -10,17 +10,26 @@ module.exports = {
     async store(req, res) {
         const { categoria } = req.params
         const { name, descricao, preco } = req.body;
+        const { filename } = req.file;
         let produto = await Produto.findOne({ name });
         if(!produto){
             produto = await Produto.create({ 
                 name, 
                 descricao,
                 preco, 
+                imagem: filename,
                 categorias: [categoria]
             });
         }        
         return res.json(produto);
     },
+
+    //mostra produtos de acordo com a categoria
+    async show(req, res){
+        const { categoria } = req.params;
+        const produtos = await Produto.find({ categorias: categoria });
+        return res.json(produtos);
+    }
 
     // async update(req, res) {
     //     const categoriaName = req.params.categoria;

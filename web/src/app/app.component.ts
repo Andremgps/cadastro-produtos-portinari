@@ -26,11 +26,10 @@ export class AppComponent implements OnInit{
 
   obterCategorias(){
     this.categoriasServicce.pegarCategorias().subscribe((res: any) => {
-      console.log(res)
       res.forEach((element: any) => {
         this.menus[1].subItems.push({
           label: element.name,
-          link: `categoria/${element._id}`
+          link: `categorias/categoria/${element._id}`
         });
       })      
     });

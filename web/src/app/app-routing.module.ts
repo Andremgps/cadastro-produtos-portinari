@@ -11,6 +11,9 @@ const routes: Routes = [
     path: '',
     redirectTo: 'home',
     pathMatch: 'full'
+  }, {
+    path: 'categorias',
+    loadChildren: './pages/categorias/categorias.module#CategoriasModule'
   }
 ];
 

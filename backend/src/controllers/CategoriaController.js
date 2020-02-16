@@ -1,4 +1,5 @@
 const Categoria = require('../models/Categoria');
+const mongo = require('mongodb');
 
 module.exports = {
     async index(req, res){
@@ -15,6 +16,14 @@ module.exports = {
         }        
         return res.json(categoria);
     },
+
+    async show(req, res){
+        const { categoriaId } = req.query;        
+        const categoria = await Categoria.findOne({ 
+            _id: new mongo.ObjectID(categoriaId) 
+        });
+        return res.json(categoria);
+    }
 
     // async update(req, res) {
     //     const categoriaName = req.params.categoria;

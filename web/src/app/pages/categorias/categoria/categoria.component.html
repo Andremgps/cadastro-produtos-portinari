@@ -1,1 +1,19 @@
-<p>categoria works!</p>
+<po-page-default [p-title]="categoria">
+    <po-container 
+        class="po-lg-12"
+        *ngIf="produtos.length; else showNoProductsMensage">
+        <po-widget 
+            class="po-lg-3 po-mb-1" 
+            *ngFor="let produto of produtos"
+            p-title="{{produto.name}}">
+            <img class="po-lg-12" src="{{produto.imagem_url}}">
+            <div class="po-font-subtitle po-text-center">{{produto.descricao}}</div>
+            <div class="po-font-subtitle po-text-center">R$: {{produto.preco}}</div>
+        </po-widget>                
+    </po-container>    
+    <ng-template #showNoProductsMensage>
+        <po-container class="po-lg-12">
+            Nenhum produto encontrado para esta categoria
+        </po-container>
+    </ng-template>
+</po-page-default>
