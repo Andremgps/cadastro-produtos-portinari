@@ -1,1 +1,14 @@
-<po-page-default p-title="Págeina Principal"></po-page-default>
+<po-page-default p-title="Página Principal">
+    <po-slide
+        p-height="450"
+        [p-slides]="produtos">
+        <ng-template p-slide-content-template let-produto>
+            <div 
+                class="sample-background-image"
+                style.background-image="url({{produto.imagem_url}})"
+                [style.backgroundSize]="'cover'"
+                [style.height.%]="100">
+            </div>
+        </ng-template>
+    </po-slide>    
+</po-page-default>
