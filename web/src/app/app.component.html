@@ -1,7 +1,12 @@
-<div class="po-wrapper">
-  <po-toolbar p-title="Cadastro de Categorias e Produtos"></po-toolbar>
+<po-navbar p-icon-actions="Array<PoNavbarIconAction>" [p-items]="navItens" p-literals="PoNavbarLiterals"
+  p-logo="./assets/portinari.jpg" [p-menu]="mainMenu" p-shadow="boolean">  
+</po-navbar>
+<div class="po-wrapper">  
 
-  <po-menu [p-menus]="menus"></po-menu>
+  <po-menu 
+    #mainMenu 
+    [p-menus]="menus"
+  ></po-menu>
 
   <router-outlet></router-outlet>
 </div>

@@ -3,13 +3,12 @@
         *ngIf="produtos.length; else showNoProductsMensage">
         <po-widget 
             class="po-md-12" 
-            *ngFor="let produto of produtos"
-            p-title="Informações Sobre o Produto">
+            *ngFor="let produto of produtos">
             <div class="po-row">
-                <div class="po-lg-4">
-                    <img src="{{produto.imagem_url}}" style="max-width: 400px; max-height: 300px;" alt="{{produto.name}}">
+                <div class="po-lg-3">
+                    <img src="{{produto.imagem_url}}" style="max-width: 300px; max-height: 250px;" alt="{{produto.name}}">
                 </div>
-                <div class="po-lg-8">
+                <div class="po-lg-9">
                     <div class="po-font-title">{{produto.name}}</div>
                     <div class="po-font-text">{{produto.descricao}}</div>
                     <div class="po-font-text-large-bold">R$: {{produto.preco}}</div>

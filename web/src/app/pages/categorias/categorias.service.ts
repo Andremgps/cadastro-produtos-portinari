@@ -23,4 +23,23 @@ export class CategoriasService {
     return this.http.get(`${this.api}/searchCategoria`, { params });
   }
 
+  criarCategoria(name: String, descricao: String){
+    return this.http.post(`${this.api}/categoria`,{
+      name,
+      descricao: descricao || ''
+    });
+  }
+
+  atualizarCategoria(id: String, name: String, descricao: String){
+    return this.http.put(`${this.api}/categoria/${id}`, {
+      name,
+      descricao
+    })
+  }
+
+  deletarCategoria(id: String){
+    this.http.delete(`${this.api}/produtos/${id}`).subscribe();
+    return this.http.delete(`${this.api}/categoria/${id}`);
+  }
+
 }

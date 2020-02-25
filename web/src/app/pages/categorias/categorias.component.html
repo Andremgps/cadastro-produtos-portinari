@@ -1,0 +1,13 @@
+<po-page-default p-title="Categorias">
+    <po-list-view 
+        [p-items]="categorias" 
+        p-property-title="name"
+        p-property-link="url"
+        >
+        <ng-template p-list-view-content-template let-categoria>
+            <div class="po-row">
+                <po-info class="po-md-12" p-label="Descrição" [p-value]="categoria.descricao"></po-info>
+            </div>
+        </ng-template>
+    </po-list-view>
+</po-page-default>

@@ -1,0 +1,25 @@
+<po-page-default p-title="Administrar Produtos">
+    <div class="po-row po-mb-3">
+        <po-button 
+            class="po-md-2" 
+            p-label="Novo Produto" 
+            p-type="primary" 
+            routerLink="/produtos/criar">
+        </po-button>
+        <po-button 
+            class="po-md-2" 
+            p-label="Excluir Selecionados" 
+            p-type="danger" 
+            (p-click)="excluirProdutos()">
+        </po-button>
+    </div>
+    <po-table 
+        p-hide-select-all="true" 
+        p-selectable 
+        [p-actions]="actions" 
+        [p-columns]="columns" 
+        [p-items]="items"
+        p-sort="true" 
+        [p-striped]="true">
+    </po-table>
+</po-page-default>

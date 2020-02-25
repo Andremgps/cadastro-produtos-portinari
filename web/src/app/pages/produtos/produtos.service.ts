@@ -13,7 +13,19 @@ export class ProdutosService {
     private http: HttpClient
   ) { }
 
-  pegarProdutos(categoria){
+  pegarProdutosPorCategoria(categoria){
     return this.http.get(`${this.api}/produtos/${categoria}`);
+  }
+
+  pegarProdutos(){
+    return this.http.get(`${this.api}/produtos`);
+  }
+
+  criarProduto(name: String, descricao: String, preco: Number){
+    return this.http.post(`${this.api}/produto`, {
+      name,
+      descricao,
+      preco
+    })
   }
 }

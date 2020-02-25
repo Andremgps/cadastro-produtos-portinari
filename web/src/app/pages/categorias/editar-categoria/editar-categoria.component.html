@@ -1,0 +1,16 @@
+<po-page-default [p-title]="edicaoTitle">
+    <form #f="ngForm">
+        <div class="po-row">
+            <po-input class="po-md-4" name="name" [(ngModel)]="name" p-label="Nome">
+            </po-input>
+            <po-input class="po-md-4" name="descricao" [(ngModel)]="descricao" p-label="Descrição">
+            </po-input>
+        </div>
+        <div class="po-row po-mt-3">
+            <po-button class="po-md-1" p-type="primary" p-label="Salvar" (p-click)="atualizarCategoria()">
+            </po-button>
+            <po-button class="po-md-1" p-type="danger" p-label="Cancelar" routerLink="/categorias/administrar">
+            </po-button>
+        </div>
+    </form>
+</po-page-default>

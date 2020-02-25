@@ -1,0 +1,45 @@
+<po-page-default p-title="Novo Produto">
+    <form #f="ngForm">
+        <div class="po-row">
+            <po-input 
+                class="po-md-4" 
+                name="name" 
+                [(ngModel)]="name" 
+                p-label="Nome">
+            </po-input>           
+            <po-number
+                class="po-md-4"
+                name="preco"
+                [(ngModel)]="preco"
+                p-label="Preço">                
+            </po-number>
+            <po-upload
+                #upload
+                class="po-md-4"
+                name="upload"
+                p-label="Imagem do Produto"
+                p-hide-send-button
+                [(ngModel)]="imagem"
+                [p-url]="imageUrl"    
+                (p-upload)="uploadBegin($event)"
+                (p-change)="changeUpload()"
+                >
+            </po-upload>
+        </div>
+        <div class="po-row">
+            <po-textarea
+                class="po-md-12"
+                name="descricao"
+                [(ngModel)]="descricao"
+                p-label="Descrição"
+                p-rows="3">                
+            </po-textarea>
+        </div>
+        <div class="po-row po-mt-3">
+            <po-button class="po-md-1" p-type="primary" p-label="Salvar" (p-click)="criarProduto()">
+            </po-button>
+            <po-button class="po-md-1" p-type="danger" p-label="Cancelar" routerLink="/produtos/administrar">
+            </po-button>
+        </div>
+    </form>
+</po-page-default>

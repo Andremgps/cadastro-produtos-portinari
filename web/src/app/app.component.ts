@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 
-import { PoMenuItem } from '@portinari/portinari-ui';
+import { PoMenuItem, PoNavbarItem } from '@portinari/portinari-ui';
 
 import { CategoriasService } from './pages/categorias/categorias.service';
+
 
 @Component({
   selector: 'app-root',
@@ -12,9 +13,20 @@ import { CategoriasService } from './pages/categorias/categorias.service';
 export class AppComponent implements OnInit{
 
   menus: Array<PoMenuItem> = [
+    { label: 'Home', link: 'home'},
+    { label: 'Categorias', subItems: []},
+    { label: 'Administração', subItems: [
+      { label: 'Categorias', link: 'categorias/administrar'},
+      { label: 'Produtos', link: 'produtos/administrar'}
+    ]}
+  ];  
+
+  navItens: Array<PoNavbarItem> = [
     { label: 'Home', link: 'home' },
-    { label: 'Categorias', subItems: []}
-  ];
+    { label: 'Categorias', link: 'categorias' },
+    { label: 'Produtos', link: 'produtos' },
+    { label: 'Sobre', link: 'Sobre' }
+  ]
 
   constructor(
     private categoriasServicce: CategoriasService
@@ -26,6 +38,7 @@ export class AppComponent implements OnInit{
 
   obterCategorias(){
     this.categoriasServicce.pegarCategorias().subscribe((res: any) => {
+      this.menus[1].subItems = [];
       res.forEach((element: any) => {
         this.menus[1].subItems.push({
           label: element.name,

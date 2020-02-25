@@ -25,7 +25,7 @@ export class CategoriaComponent implements OnInit {
       this.categoriasService.pegarCategoriaPorId(categoriaId).subscribe((res: any) => {        
         this.categoria = res.name;
       })
-      this.produtosService.pegarProdutos(categoriaId).subscribe((res: any) =>{
+      this.produtosService.pegarProdutosPorCategoria(categoriaId).subscribe((res: any) =>{
         this.produtos = res;
       });
     })

@@ -1,4 +1,5 @@
 const Produto = require('../models/Produto');
+const mongo = require('mongodb');
 
 module.exports = {
     async index(req, res){        
@@ -7,10 +8,10 @@ module.exports = {
         return res.json(produto);
     },
 
-    async store(req, res) {
-        const { categoria } = req.params
-        const { name, descricao, preco } = req.body;
-        const { filename } = req.file;
+    async store(req, res) {  
+        //Solução paliativa para o upload file do portinari          
+        const { name, descricao, preco, categorias } = JSON.parse(req.body.data);
+        const filename = req.file ? req.file.filename : '';
         let produto = await Produto.findOne({ name });
         if(!produto){
             produto = await Produto.create({ 
@@ -18,7 +19,7 @@ module.exports = {
                 descricao,
                 preco, 
                 imagem: filename,
-                categorias: [categoria]
+                categorias: categorias
             });
         }        
         return res.json(produto);
@@ -29,6 +30,18 @@ module.exports = {
         const { categoria } = req.params;
         const produtos = await Produto.find({ categorias: categoria });
         return res.json(produtos);
+    },
+
+    async deleteCategorysFromProducts(req, res){
+        const { categoria } = req.params;        
+        await Produto.updateMany({ }, {
+            $pull: {
+                categorias: new mongo.ObjectID(categoria)
+            }
+        }, {
+            multi: true
+        })
+        return res.json({message: 'succes'});
     }
 
     // async update(req, res) {
