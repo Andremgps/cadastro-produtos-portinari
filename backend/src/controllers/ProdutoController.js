@@ -1,44 +1,87 @@
 const Produto = require('../models/Produto');
+const mongo = require('mongodb');
 
 module.exports = {
     async index(req, res){        
-        const produtoName = req.query.produto;
-        const produto = await Produto.find(produtoName ? { name: produtoName } : {});
+        const { produtoId } = req.query;
+        const produto = await Produto.find(produtoId ? { 
+            _id: new mongo.ObjectID(produtoId) 
+        } : {});
         return res.json(produto);
     },
 
-    async store(req, res) {
-        const { categoria } = req.params
-        const { name, descricao, preco } = req.body;
+    async store(req, res) {                    
+        const { name, descricao, preco, categorias } = req.body;
+        const filename = req.file ? req.file.filename : undefined;
         let produto = await Produto.findOne({ name });
         if(!produto){
             produto = await Produto.create({ 
                 name, 
                 descricao,
                 preco, 
-                categorias: [categoria]
+                imagem: filename,
+                categorias: JSON.parse(categorias)
             });
         }        
         return res.json(produto);
     },
 
-    // async update(req, res) {
-    //     const categoriaName = req.params.categoria;
-    //     const { produto } = req.body;
-    //     let categoria = await Categoria.findOne({ name: categoriaName });
-    //     if(!categoria){
-    //         return res.status(400).json({ error: 'Categoria Não Encontrada!' });
-    //     }
-    //     let { produtos } = categoria;        
-    //     produtos.push(produto);
-    //     await Categoria.updateOne({ name: categoriaName }, {
-    //         $set: {
-    //             produtos
-    //         }
-    //     })
+    //mostra produtos de acordo com a categoria
+    async show(req, res){
+        const { categoria } = req.params;
+        const produtos = await Produto.find({ categorias: categoria });
+        return res.json(produtos);
+    },
 
-    //     categoria = await Categoria.findOne({ name: categoriaName });
+    async update(req, res) {
+        const { id } = req.params;
+        const _id = new mongo.ObjectID(id);
+        const { name, descricao, preco, categorias } = req.body;
+        const filename = req.file ? req.file.filename : undefined;
+        let produto = await Produto.findOne({ _id });
+        if (!produto) {
+            return res.status(400).json({ error: 'Categoria Não Encontrada!' });
+        }        
+        await Produto.updateOne({ _id }, {
+            $set: {
+                name,
+                descricao,
+                preco,
+                imagem: filename || produto.imagem,
+                categorias: JSON.parse(categorias)
+            }            
+        });
 
-    //     return res.json(categoria);
-    // }
+        produto = await Produto.findOne({ _id });
+
+        return res.json(produto);
+    },
+
+    async destroy(req, res){
+        const { id } = req.params;
+        const _id = new mongo.ObjectID(id);
+        let produto = await Produto.findOne({
+            _id
+        });
+        if (!produto) {
+            return res.status(400).json({ error: 'Produto Não Encontrada' });
+        }
+        produto = await Produto.deleteOne({
+            _id
+        });
+
+        return res.json(produto);
+    },
+
+    async deleteCategorysFromProducts(req, res) {
+        const { categoria } = req.params;
+        await Produto.updateMany({}, {
+            $pull: {
+                categorias: new mongo.ObjectID(categoria)
+            }
+        }, {
+            multi: true
+        })
+        return res.json({ message: 'succes' });
+    },
 };

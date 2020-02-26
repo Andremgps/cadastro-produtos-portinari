@@ -1,0 +1,16 @@
+<po-page-default p-title="Produtos">
+    <div class="po-row">
+        <po-widget class="po-md-12" *ngFor="let produto of produtos">
+            <div class="po-row">
+                <div class="po-lg-3">
+                    <img src="{{produto.imagem_url}}" style="max-width: 300px; max-height: 250px;" alt="{{produto.name}}">
+                </div>
+                <div class="po-lg-9">
+                    <div class="po-font-title">{{produto.name}}</div>
+                    <div class="po-font-text">{{produto.descricao}}</div>
+                    <div class="po-font-text-large-bold">R$: {{produto.preco}}</div>
+                </div>
+            </div>
+        </po-widget>
+    </div>
+</po-page-default>

@@ -1,7 +1,8 @@
 const mongoose = require('mongoose');
 
 const CategoriaSchema = new mongoose.Schema({
-    name: String,        
+    name: String,  
+    descricao: String 
     //produtos: [String]
 });
 
