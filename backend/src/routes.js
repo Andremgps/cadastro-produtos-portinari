@@ -21,12 +21,16 @@ routes.delete('/categoria/:id', CategoriaController.destroy);
 
 //Cria Produtos
 //routes.post('/categoria/:categoria/produto', ProdutoController.store);
-routes.post("/produto", upload.single('files'),ProdutoController.store);
+routes.post("/produto", upload.single('imagem'), ProdutoController.store);
 //Lista Produtos
 routes.get('/produtos', ProdutoController.index);
 //Lista produtos por categoria
 routes.get('/produtos/:categoria', ProdutoController.show);
+//Atualiza Produto
+routes.put('/produto/:id', upload.single('imagem'), ProdutoController.update);
+//Deleta Produto
+routes.delete('/produto/:id', ProdutoController.destroy);
 //Deleta Categorias dos Produtos
-routes.delete('/produtos/:categoria', ProdutoController.deleteCategorysFromProducts);
+routes.delete('/produtos/categoria/:categoria', ProdutoController.deleteCategorysFromProducts);
 
 module.exports = routes;

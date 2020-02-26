@@ -24,8 +24,7 @@ export class AppComponent implements OnInit{
   navItens: Array<PoNavbarItem> = [
     { label: 'Home', link: 'home' },
     { label: 'Categorias', link: 'categorias' },
-    { label: 'Produtos', link: 'produtos' },
-    { label: 'Sobre', link: 'Sobre' }
+    { label: 'Produtos', link: 'produtos' }    
   ]
 
   constructor(

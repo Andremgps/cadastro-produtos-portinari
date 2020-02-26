@@ -38,7 +38,7 @@ export class CategoriasService {
   }
 
   deletarCategoria(id: String){
-    this.http.delete(`${this.api}/produtos/${id}`).subscribe();
+    this.http.delete(`${this.api}/produtos/categoria/${id}`).subscribe();
     return this.http.delete(`${this.api}/categoria/${id}`);
   }
 

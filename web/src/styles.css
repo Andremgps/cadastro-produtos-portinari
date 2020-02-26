@@ -1,1 +1,22 @@
 /* You can add global styles to this file, and also import other style files */
+.image-upload .po-widget{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+:root {
+  --color-primary:  #cc0000;
+  --color-secondary: #990000;  
+  --color-menu-background-color-menu:#cc0000;
+  --color-menu-background-color-sub-items: #990000;
+  --color-menu-color-menu-sub-item-selected: #cc0000;
+  --color-menu-color-menu-item-selected:#cc0000;
+  --color-menu-color-menu-item-text: #ffffff;
+  --color-menu-color-menu-sub-item-text: #ffffff;
+  --color-navbar-color: #cc0000;
+  --color-navbar-item-color: #ffffff;
+  --color-primary-dark-20: #cc0000;
+  --color-secondary-dark-20: #cc0000;
+    --color-navbar-item-color-shadow-selected:#ffffff; 
+}

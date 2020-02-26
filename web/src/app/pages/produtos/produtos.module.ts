@@ -7,13 +7,15 @@ import { PoModule, PoButtonModule, PoNotificationModule } from '@portinari/porti
 import { AdmProdutosComponent } from './adm-produtos/adm-produtos.component';
 import { FormsModule } from '@angular/forms';
 import { CriarProdutoComponent } from './criar-produto/criar-produto.component';
+import { EditarProdutoComponent } from './editar-produto/editar-produto.component';
 
 
 @NgModule({
   declarations: [
     ProdutosComponent,
     AdmProdutosComponent,
-    CriarProdutoComponent
+    CriarProdutoComponent,
+    EditarProdutoComponent
   ],
   imports: [
     CommonModule,

@@ -12,19 +12,14 @@
                 name="preco"
                 [(ngModel)]="preco"
                 p-label="Preço">                
-            </po-number>
-            <po-upload
-                #upload
+            </po-number>    
+            <po-multiselect
                 class="po-md-4"
-                name="upload"
-                p-label="Imagem do Produto"
-                p-hide-send-button
-                [(ngModel)]="imagem"
-                [p-url]="imageUrl"    
-                (p-upload)="uploadBegin($event)"
-                (p-change)="changeUpload()"
-                >
-            </po-upload>
+                p-label="Categorias"
+                name="categorias"
+                [(ngModel)]="categorias"
+                [p-options]="categoriaOptions">                
+            </po-multiselect>        
         </div>
         <div class="po-row">
             <po-textarea
@@ -34,6 +29,23 @@
                 p-label="Descrição"
                 p-rows="3">                
             </po-textarea>
+        </div>
+        <div class="po-row">
+            <div class="po-md-3"> 
+                <label class="image-upload">
+                    <po-widget>   
+                        <div class="po-field-title">Selecione uma imagem para o Produto</div>
+                        <div class="po-font-title po-text-center">                                                        
+                            <span class="po-icon {{iconControl}} po-clickable">
+                                <input #file type="file" accept="image/*" (change)="preview(file.files)" style="display: none;">
+                            </span>                                                        
+                        </div>             
+                        <div class="po-text-center">
+                            <img [src]="imgURL" style="max-width: 300px; max-height: 250px;" *ngIf="imgURL">
+                        </div>                                                           
+                    </po-widget>
+                </label>                
+            </div>
         </div>
         <div class="po-row po-mt-3">
             <po-button class="po-md-1" p-type="primary" p-label="Salvar" (p-click)="criarProduto()">

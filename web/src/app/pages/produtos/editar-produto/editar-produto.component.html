@@ -1,0 +1,41 @@
+<po-page-default [p-title]="edicaoTitle">
+    <form #f="ngForm">
+        <div class="po-row">
+            <po-input class="po-md-4" name="name" [(ngModel)]="name" p-label="Nome">
+            </po-input>
+            <po-number class="po-md-4" name="preco" [(ngModel)]="preco" p-label="Preço">
+            </po-number>
+            <po-multiselect class="po-md-4" p-label="Categorias" name="categorias" [(ngModel)]="categorias"
+                [p-options]="categoriaOptions">
+            </po-multiselect>
+        </div>
+        <div class="po-row">
+            <po-textarea class="po-md-12" name="descricao" [(ngModel)]="descricao" p-label="Descrição" p-rows="3">
+            </po-textarea>
+        </div>
+        <div class="po-row">
+            <div class="po-md-3">
+                <label class="image-upload">
+                    <po-widget>
+                        <div class="po-field-title">Selecione uma imagem para o Produto</div>
+                        <div class="po-font-title po-text-center">
+                            <span class="po-icon {{iconControl}} po-clickable">
+                                <input #file type="file" accept="image/*" (change)="preview(file.files)"
+                                    style="display: none;">
+                            </span>
+                        </div>
+                        <div class="po-text-center">
+                            <img [src]="imgURL" style="max-width: 300px; max-height: 250px;" *ngIf="imgURL">
+                        </div>
+                    </po-widget>
+                </label>
+            </div>
+        </div>
+        <div class="po-row po-mt-3">
+            <po-button class="po-md-1" p-type="primary" p-label="Salvar" (p-click)="atualizarProduto()">
+            </po-button>
+            <po-button class="po-md-1" p-type="danger" p-label="Cancelar" routerLink="/produtos/administrar">
+            </po-button>
+        </div>
+    </form>
+</po-page-default>

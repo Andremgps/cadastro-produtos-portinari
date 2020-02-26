@@ -5,9 +5,37 @@
         <ng-template p-slide-content-template let-produto>
             <div 
                 class="sample-background-image"
-                style.background-image="url({{produto.imagem_url}})"
+                [style.background-image]="'url('+ urlFundo +')'"
                 [style.backgroundSize]="'cover'"
                 [style.height.%]="100">
+                <div class="po-offset-sm-1 po-offset-md-1 po-offset-lg-1 po-offset-xl-1 po-lg-9 po-md-10 po-sm-10 po-mt-4 po-mb-4 po-p-5"
+                    [style.background]="'white'">
+                    <div class="po-row">
+                        <div class="po-xl-4 po-lg-5 po-md-6 po-sm-12">
+                            <img src="{{produto.imagem_url}}" style="max-width: 250px; max-height: 200px;" alt="{{produto.name}}">
+                        </div>
+                        <div class="po-xl-8 po-lg-7 po-md-6 po-sm-12">
+                            <div class="po-font-display">{{produto.name}}</div>
+                            <div class="po-font-text">R$: {{produto.preco}}</div>
+                            <po-divider></po-divider>
+                            <div class="po-font-text-large po-mb-3">{{produto.descricao}}</div>
+                            <po-button p-label="Mais Produtos" (p-click)="redirectLink()"></po-button>
+                        </div>                        
+                    </div>                    
+                </div>
+                <!-- <div class="po-row">                    
+                    <div class="po-offset-sm-1 po-offset-md-1 po-offset-lg-1 po-offset-xl-1 po-lg-8 po-sm-10 po-mt-4 po-mb-4 po-p-5"
+                        [style.background]="'white'">                        
+                        <div class="po-lg-5">
+                            <img src="{{produto.imagem_url}}" style="max-width: 300px; max-height: 250px;" alt="{{produto.name}}">
+                        </div>                        
+                        <div class="po-font-display">{{produto.name}}</div>
+                        <div class="po-font-text">R$: {{produto.preco}}</div>
+                        <po-divider></po-divider>
+                        <div class="po-font-text-large po-mb-3">{{produto.descricao}}</div>
+                        <po-button p-label="Mais Produtos" (p-click)="redirectLink()"></po-button>                                              
+                    </div>
+                </div> -->
             </div>
         </ng-template>
     </po-slide>    

@@ -1,22 +1,33 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
+import { Router } from '@angular/router';
+import { ProdutosService } from '../produtos/produtos.service';
 
 @Component({
   selector: "app-home",
   templateUrl: "./home.component.html",
-  styleUrls: ["./home.component.css"]
+  styleUrls: ["./home.component.css"],  
 })
 export class HomeComponent implements OnInit {
-  produtos: Array<any> = [
-    {
-      name: "produto lula",
-      descricao: "Lula Livre",
-      preco: 99999999,
-      imagem: "930cb05f14f6f5d7492d22212614a573-1581892751870.jpg",
-      imagem_url: "http://localhost:3333/files/930cb05f14f6f5d7492d22212614a573-1581892751870.jpg"
-    }
-  ];
+  urlFundo: string = '/assets/fundo-loja.jpg'
 
-  constructor() {}
+  produtos: Array<any>;
 
-  ngOnInit() {}
+  constructor(
+    private router: Router,
+    private produtosService: ProdutosService,    
+  ) {}
+
+  ngOnInit() {
+    this.obterProdutos();
+  }
+
+  obterProdutos(){
+    this.produtosService.pegarProdutos().subscribe((res: any) => {
+      this.produtos = res;     
+    })
+  }
+
+  redirectLink(){
+    this.router.navigate(['/produtos']);
+  }
 }
