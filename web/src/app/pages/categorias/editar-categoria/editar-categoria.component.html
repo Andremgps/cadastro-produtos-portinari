@@ -1,10 +1,14 @@
 <po-page-default [p-title]="edicaoTitle">
     <form #f="ngForm">
         <div class="po-row">
-            <po-input class="po-md-4" name="name" [(ngModel)]="name" p-label="Nome">
-            </po-input>
-            <po-input class="po-md-4" name="descricao" [(ngModel)]="descricao" p-label="Descrição">
-            </po-input>
+            <po-input class="po-md-6" name="name" [(ngModel)]="name" p-label="Nome">
+            </po-input>     
+            <po-multiselect class="po-md-6" p-label="Produtos" name="produtos" [(ngModel)]="produtos" [p-options]="produtoOptions">
+            </po-multiselect>
+        </div>
+        <div class="po-row">
+            <po-textarea class="po-md-12" name="descricao" [(ngModel)]="descricao" p-label="Descrição">
+            </po-textarea>
         </div>
         <div class="po-row po-mt-3">
             <po-button class="po-md-1" p-type="primary" p-label="Salvar" (p-click)="atualizarCategoria()">

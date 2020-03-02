@@ -40,20 +40,38 @@ module.exports = {
         const filename = req.file ? req.file.filename : undefined;
         let produto = await Produto.findOne({ _id });
         if (!produto) {
-            return res.status(400).json({ error: 'Categoria Não Encontrada!' });
+            return res.status(400).json({ error: 'Produto Não Encontrada!' });
         }        
         await Produto.updateOne({ _id }, {
             $set: {
-                name,
-                descricao,
-                preco,
+                name: name || produto.name,
+                descricao: descricao || produto.descricao,
+                preco: preco || produto.preco,
                 imagem: filename || produto.imagem,
-                categorias: JSON.parse(categorias)
+                categorias: categorias ? JSON.parse(categorias) : produto.categorias
             }            
         });
 
         produto = await Produto.findOne({ _id });
 
+        return res.json(produto);
+    },
+
+    async updateCategoriaInProduto(req, res){
+        const { id } = req.params;
+        const { categoria } = req.body; 
+        console.log(req)
+        const _id = new mongo.ObjectID(id);
+        let produto = await Produto.findOne({ _id });
+        if (!produto) {
+            return res.status(400).json({ error: 'Produto Não Encontrada!' });
+        }
+        await Produto.updateOne({ _id }, {
+            $push: {
+                categorias: new mongo.ObjectID(categoria)
+            }
+        });
+        produto = await Produto.findOne({ _id });
         return res.json(produto);
     },
 

@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { PoNotificationService } from "@portinari/portinari-ui";
+import { PoNotificationService, PoMultiselectOption } from "@portinari/portinari-ui";
 import { CategoriasService } from '../categorias.service';
 import { Router } from "@angular/router";
 import { AppComponent } from '../../../app.component';
+import { ProdutosService } from '../../produtos/produtos.service';
 
 @Component({
   selector: "app-editar-categoria",
@@ -14,18 +15,22 @@ export class EditarCategoriaComponent implements OnInit {
   edicaoTitle: String = 'Edição: ';
   name: String;
   descricao: String;
+  produtos: Array<any>;
+  produtoOptions: Array<PoMultiselectOption> = [];
 
   constructor(
     private route: ActivatedRoute,    
     private categoriasService: CategoriasService,
     private poNotification: PoNotificationService,
     private router: Router,
+    private produtosService: ProdutosService,
     private appComponent: AppComponent
   ) {}
 
-  ngOnInit() {
+  ngOnInit() {    
     this.route.paramMap.subscribe(params => {
       const categoriaId = params.get("id");
+      this.loadProductOptions(categoriaId);
       this.categoriasService
         .pegarCategoriaPorId(categoriaId)
         .subscribe((res: any) => {
@@ -45,11 +50,43 @@ export class EditarCategoriaComponent implements OnInit {
         this.categoriasService
           .atualizarCategoria(categoriaId, this.name, this.descricao)
           .subscribe((res: any) => {
-            this.poNotification.success("Atualizado com sucesso");
+            this.poNotification.success("Atualizado com sucesso");            
+            const categoryId = res._id;
+            this.updateCategoryInProducts(categoryId);            
             this.router.navigate(['/categorias/administrar']);
             this.appComponent.obterCategorias();
           });
       }); 
     }    
+  }
+
+  loadProductOptions(categoriaId: string) {
+    this.produtosService.pegarProdutos().subscribe((res: any) => {
+      res.forEach(element => {
+        this.produtoOptions.push({
+          value: element._id,
+          label: element.name
+        })
+      })
+    }, error => console.error(error), () => {
+      this.setProductOptions(categoriaId);
+    })
+  }
+
+  setProductOptions(categoriaId: string){
+    this.produtosService.pegarProdutosPorCategoria(categoriaId).subscribe((res: any) => {
+      const optionsValue = res.map(x => x._id);
+      this.produtos = optionsValue;
+    })
+  }
+
+  updateCategoryInProducts(categoryId: string) {        
+    this.produtosService.deletarCategoriaInProduto(categoryId).subscribe(() => { return }, error => {
+      console.error(error);
+    }, () => {
+      this.produtos.forEach(element => {
+        this.produtosService.pushCategoria(element, categoryId).subscribe();
+      });
+    })          
   }
 }

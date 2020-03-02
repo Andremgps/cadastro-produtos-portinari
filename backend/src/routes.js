@@ -28,6 +28,8 @@ routes.get('/produtos', ProdutoController.index);
 routes.get('/produtos/:categoria', ProdutoController.show);
 //Atualiza Produto
 routes.put('/produto/:id', upload.single('imagem'), ProdutoController.update);
+//Insere uma cateogira no produto
+routes.put('/produto/:id/pushCategoria', ProdutoController.updateCategoriaInProduto);
 //Deleta Produto
 routes.delete('/produto/:id', ProdutoController.destroy);
 //Deleta Categorias dos Produtos

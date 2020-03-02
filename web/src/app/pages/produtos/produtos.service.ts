@@ -49,6 +49,16 @@ export class ProdutosService {
     return this.http.put(`${this.api}/produto/${id}`, formData);
   }
 
+  pushCategoria(id: string, categoria: string){    
+    return this.http.put(`${this.api}/produto/${id}/pushCategoria`, {
+      categoria
+    });
+  }
+
+  deletarCategoriaInProduto(id: string){
+    return this.http.delete(`${this.api}/produtos/categoria/${id}`);
+  }
+
   deletarProduto(id: string){
     return this.http.delete(`${this.api}/produto/${id}`);
   }

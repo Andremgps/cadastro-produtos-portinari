@@ -2,11 +2,18 @@
     <form #f="ngForm">
         <div class="po-row">
             <po-input 
-                class="po-md-4"
+                class="po-md-6"
                 name="name"
                 [(ngModel)]="name"
                 p-label="Nome">
-            </po-input>            
+            </po-input>       
+            <po-multiselect 
+                class="po-md-6" 
+                p-label="Produtos" 
+                name="produtos" 
+                [(ngModel)]="produtos"
+                [p-options]="produtoOptions">
+            </po-multiselect>
         </div>
         <div class="po-row">
             <po-textarea 
